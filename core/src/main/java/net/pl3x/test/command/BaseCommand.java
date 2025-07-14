@@ -12,9 +12,9 @@ public abstract class BaseCommand<T> extends LiteralArgumentBuilder<T> {
         this.func = func;
     }
 
-    protected final int execute(CommandContext<T> ctx) {
+    protected int execute(CommandContext<T> ctx) {
         return this.execute(func.apply(ctx.getSource()), ctx);
     }
 
-    protected abstract int execute(final Source src, CommandContext<T> ctx);
+    protected abstract int execute(Source src, CommandContext<T> ctx);
 }

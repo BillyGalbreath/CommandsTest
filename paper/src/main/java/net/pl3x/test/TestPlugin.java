@@ -1,5 +1,6 @@
 package net.pl3x.test;
 
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import java.util.function.Function;
@@ -17,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class TestPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
-        final Function<CommandSourceStack, Source> func = stack -> {
+        Function<CommandSourceStack, Source> func = stack -> {
             CommandSender sender = stack.getSender();
             return new PaperSource(sender instanceof Player player
                     ? new PaperPlayer(player)
@@ -28,6 +29,13 @@ public class TestPlugin extends JavaPlugin {
         getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             event.registrar().register(new FooCommand<>(func).build(), "Testing foo");
             event.registrar().register(new BarCommand<>(func).build(), "Testing bar");
+            event.registrar().register(LiteralArgumentBuilder.<CommandSourceStack>literal("test")
+                    .executes(ctx -> {
+                        ctx.getSource().getSender().sendMessage("testing 1 2 3");
+                        return 1;
+                    })
+                    .build()
+            );
         });
     }
 }

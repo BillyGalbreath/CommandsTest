@@ -10,12 +10,12 @@ public class PaperSender implements Sender {
     }
 
     @Override
-    public boolean hasPermission(final String permission) {
+    public boolean hasPermission(String permission) {
         return this.sender.hasPermission(permission);
     }
 
     @Override
-    public void sendMessage(final String message) {
+    public void sendMessage(String message) {
         this.sender.sendMessage(message);
     }
 }
