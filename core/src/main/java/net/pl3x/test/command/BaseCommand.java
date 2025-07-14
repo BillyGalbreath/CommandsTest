@@ -9,6 +9,7 @@ public abstract class BaseCommand<T> extends LiteralArgumentBuilder<T> {
 
     protected BaseCommand(String name, Function<T, Source> func) {
         super(name);
+        executes(this::execute);
         this.func = func;
     }
 
