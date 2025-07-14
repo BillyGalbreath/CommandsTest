@@ -1,0 +1,5 @@
+name: "CommandsTest"
+main: "net.pl3x.test.TestPlugin"
+version: "0.0.1"
+api-version: "1.21"
+description: "Testing direct brigadier commands"
